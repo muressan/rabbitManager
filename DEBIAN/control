@@ -1,0 +1,5 @@
+Package: rabbitManager
+Version: 1.0
+Architecture: amd64
+Maintainer: Danilo Gimenes Tasso <muressan@gmail.com>
+Description: Read, download, and post messages in a rabbitMQ
