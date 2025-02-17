@@ -81,8 +81,8 @@ Increment version in DEBIAN/control file
 
 # Futures releases and new features
 
-	Include header with message_id when downloading json individual files and when list json payload output file.
-	Include confirmation message when user call method backup without --auto-ack parameter. 
+	Include header with message_id when downloading individual json files as well as in the single file with the list of messages.
+	Include confirmation message when user call method backup without --auto-ack parameter. To avoid acidental call with no ack, because this can be harmful to rabbitMQ nodes depending on the amount of messages in the queue.
 	Add a new script file to automated the debian package creation process.
 	Add a docker-compose to up a container rabbitMQ to test the script.
 
