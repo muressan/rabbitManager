@@ -86,4 +86,4 @@ Increment version in DEBIAN/control file
 	Add a new script file to automated the debian package creation process.
 	Add a docker-compose to up a container rabbitMQ to test the script.
         Add new backup parameter to download messages with headers. This is useful to get more informations about the message, like erros.
-
+	Put a flow diagram in this documentation (using mermaid) that shows the flow of script options
