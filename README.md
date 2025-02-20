@@ -85,4 +85,5 @@ Increment version in DEBIAN/control file
 	Include confirmation message when user call method backup without --auto-ack parameter. To avoid acidental call with no ack, because this can be harmful to rabbitMQ nodes depending on the amount of messages in the queue.
 	Add a new script file to automated the debian package creation process.
 	Add a docker-compose to up a container rabbitMQ to test the script.
+        Add new backup parameter to download messages with headers. This is useful to get more informations about the message, like erros.
 
