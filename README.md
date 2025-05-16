@@ -87,3 +87,5 @@ Increment version in DEBIAN/control file
 	Add a docker-compose to up a container rabbitMQ to test the script.
         Add new backup parameter to download messages with headers. This is useful to get more informations about the message, like erros.
 	Put a flow diagram in this documentation (using mermaid) that shows the flow of script options
+ 	Quando estiver fazendo backup, dar nack automático, caso estiver rodando o script sem o parametro --auto-ack para não acumular mensagens na área de nack do servidor e chegar ao ponto de estourar os recursos.
+  	Tentar logar no início do backup a quantidade de mensagens na fila e aguardar uma confirmação antes de iniciar o processo.
