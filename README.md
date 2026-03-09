@@ -7,11 +7,11 @@ Important: Initially the instructions listed here are only applicable to Linux b
 # General Resources and usage scenarios
 Reading:
     Read messages with implicity JSON format.
-    Save backup copies of individuaal messages.
+    Save backup copies in rotating .jsonl files.
     Read messages one by one and make ACK.
-    Generate a JSON list with all messages in the queue.
 Posting:
-    Post messages in a queue from a JSON list.
+    Post messages in a queue from a JSONL file.
+    Post messages in a direct, topic or fanout exchange.
 
 
 # Requirements to develop and test
@@ -38,17 +38,43 @@ Reading messages one by one
 
     python3 rabbitManager.py [queue-name]
 
-Reading all messages and writing a payloads.json list in current directory:
+Backup with rotating .jsonl files and ACK per message after persistence confirmed
 
     python3 rabbitManager.py [queue-name] backup
 
-Reading all messages and writing a payloads.json list in a new directory nested with the queue's name [queue-name] (removing messages from queue)
+Backup with custom batch size and prefetch
 
-    python3 rabbitManager.py [queue-name] backup --auto-ack
+    python3 rabbitManager.py [queue-name] backup --batch-size 1000 --prefetch-count 200
 
-Reading all messages and writing a payloads.json list and individual file messages in a new directory nested with the queue's name [queue-name]
+Backup with batch ACK
+Important: the script asks for an explicit confirmation before consuming the queue
+
+    python3 rabbitManager.py [queue-name] backup --ack-mode batch
+
+Backup without ACK (use with extreme caution; ensure the queue has around 100 messages)
+The script will emit a red alert before starting and wait for confirmation.
+
+    python3 rabbitManager.py [queue-name] backup --no-ack
+
+Backup with rotating .jsonl files and individual message files
 
     python3 rabbitManager.py [queue-name] backup --one-file-per-msg
+
+Posting messages in a queue from a JSONL file
+
+    python3 rabbitManager.py [queue-name] [jsonl-file]
+
+Posting messages in a direct exchange with routing key
+
+    python3 rabbitManager.py --exchange [exchange-name] --exchange-type direct --routing-key [routing-key] [jsonl-file]
+
+Posting messages in a topic exchange with routing key
+
+    python3 rabbitManager.py --exchange [exchange-name] --exchange-type topic --routing-key [routing-key] [jsonl-file]
+
+Posting messages in a fanout exchange
+
+    python3 rabbitManager.py --exchange [exchange-name] --exchange-type fanout [jsonl-file]
 
 
 Help:
@@ -81,8 +107,7 @@ Increment version in DEBIAN/control file
 
 # Futures releases and new features
 
-	Include header with message_id when downloading json individual files and when list json payload output file.
-	Include confirmation message when user call method backup without --auto-ack parameter. 
+	Include header with message_id when downloading json individual files and when list json payload output file. 
 	Add a new script file to automated the debian package creation process.
 	Add a docker-compose to up a container rabbitMQ to test the script.
 
