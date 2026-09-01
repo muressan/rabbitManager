@@ -81,6 +81,47 @@ Help:
 
     python3 rabbitManager.py
 
+# Installing from the Debian package (.deb)
+
+The generated package is intended for Debian-based 64-bit systems (`amd64`), such as Debian and Ubuntu.
+
+Copy `rabbitManager.deb` to the target machine, open a terminal in the directory containing the file, and install it with:
+
+    sudo apt update
+    sudo apt install ./rabbitManager.deb
+
+The `./` prefix is required when installing a local package. Alternatively, use `dpkg` and ask APT to resolve any missing dependencies:
+
+    sudo dpkg -i rabbitManager.deb
+    sudo apt-get install -f
+
+After installation, configure the RabbitMQ connection for the current terminal session:
+
+    export RABBITMQ_VHOST=[vhost-name]
+    export RABBITMQ_HOST=[hostname]
+    export RABBITMQ_USER=[username]
+    export RABBITMQ_PASSWD=[user-password]
+    export RABBITMQ_PORT=5672
+
+Confirm that the executable is available and display its help:
+
+    command -v rabbitManager
+    rabbitManager --help
+
+Use the installed command without `python3`. For example:
+
+    rabbitManager [queue-name]
+    rabbitManager [queue-name] backup
+    rabbitManager [queue-name] [jsonl-file]
+
+To update the application, copy the new `.deb` to the target machine and run the installation command again:
+
+    sudo apt install ./rabbitManager.deb
+
+To remove the application:
+
+    sudo apt remove rabbitmanager
+
 # Requirements to generate a executable and distribuition debian package (.deb)
 This will be needed to generate a Debian Package (DEB):
 
